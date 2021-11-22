@@ -9,7 +9,7 @@ namespace AngularGroupProject.Models
     public class ApplicationUser : IdentityUser
     {
 
-
+        public ICollection<Fav> Favs { get; set; }
 
     }
 }
