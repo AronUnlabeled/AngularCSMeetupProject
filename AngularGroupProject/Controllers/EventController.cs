@@ -29,7 +29,7 @@ namespace AngularGroupProject.Controllers
 
         }
 
-        [HttpGet("getEvent")]
+        [HttpGet("getEvent/{id}")]
         public Event getEventById(int Id)
         {
 
@@ -55,11 +55,12 @@ namespace AngularGroupProject.Controllers
         }
 
         [HttpDelete("deleteEvent")]
-        public void deleteEvent(Event deletedEvent)
+        public Event deleteEvent(int id)
         {
+            Event deletedEvent = EventContext.Events.Find(id);
             EventContext.Events.Remove(deletedEvent);
             EventContext.SaveChanges();
-
+            return deletedEvent;
         }
 
     }

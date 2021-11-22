@@ -12,6 +12,9 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
+import { EventsComponent } from './events/events.component';
+import { EventDetailsComponent } from './event-details/event-details.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
+    EventsComponent,
+    EventDetailsComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -30,6 +36,7 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
+      { path: 'events', component: EventsComponent },
     ])
   ],
   providers: [

@@ -52,11 +52,12 @@ namespace AngularGroupProject.Controllers
         }
 
         [HttpDelete("deleteFavs")]
-        public void deleteFav(Fav deletedFav)
+        public Fav deleteFav(int id)
         {
+            Fav deletedFav = FavsContext.Favs.Find(id);
             FavsContext.Favs.Remove(deletedFav);
             FavsContext.SaveChanges();
-
+            return deletedFav;
         }
 
     }
