@@ -18,10 +18,10 @@ export class EventService {
   }
 
   addEvent(name: string, date: Date, location: string, description: string) : any {
-    return this.http.post(this.baseUrl + 'api/Event/addEvent', {});
+    return this.http.post(this.baseUrl + `api/Event/addEvent?name=${name}&date=${date}&location=${location}&description=${description}`, {});
   }
 
   deleteEvent(id : number): any {
-    return this.http.delete(this.baseUrl + 'api/Event/deleteEvent')
+    return this.http.delete(this.baseUrl + `api/Event/deleteEvent/${id}`)
   }
 }

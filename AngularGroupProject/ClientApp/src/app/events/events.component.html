@@ -3,4 +3,21 @@
 <div *ngFor="let E of DisplayEvents">
   <h3>{{ E.name }}</h3>
   <button routerLink="/event/{{ E.id }}">See more details</button>
+  <button onclick="addFav(E.id)">Add to Favorites</button>
 </div>
+<form #addForm="ngForm" (ngSubmit)="addEvent(addForm)">
+  <label for="name">Event Name: </label>
+  <input type="text" name="name" id="name" ngModel /><br />
+
+  <label for="date">Event Date: </label>
+  <input type="date" name="date" id="date" ngModel /> <br />
+
+  <label for="location">Event Location: </label>
+  <input type="text" name="location" id="location" ngModel /><br />
+
+  <label for="decription">Description: </label>
+  <input type="text" name="description" id="description" ngModel /><br />
+
+ <button>Add Event</button>
+
+</form>

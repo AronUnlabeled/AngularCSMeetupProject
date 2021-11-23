@@ -54,7 +54,7 @@ namespace AngularGroupProject.Controllers
             return newEvent;
         }
 
-        [HttpDelete("deleteEvent")]
+        [HttpDelete("deleteEvent/{id}")]
         public Event deleteEvent(int id)
         {
             Event deletedEvent = EventContext.Events.Find(id);

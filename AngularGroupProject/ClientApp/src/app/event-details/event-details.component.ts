@@ -17,25 +17,38 @@ export class EventDetailsComponent {
 
   resultEvent: Event = {} as Event;
 
-  @Input() event: Event = {} as Event;
-  @Output() removeFromEvent = new EventEmitter<Number>();
+  //@Input() event: Event = {} as Event;
+  //@Output() removeFromEvent = new EventEmitter<Number>();
 
   ngOnInit(): void {
     const routeParams = this.router.snapshot.paramMap;
     let ID: number = Number(routeParams.get("id"));
     this.eventservice.getEventById(ID).subscribe((response: any) => {
       this.resultEvent = response;
-      let indexNum: number = this.resultEvent.date.indexOf("T");
-      this.resultEvent.date = this.resultEvent.date.substring(0, indexNum);
+      //let indexNum: number = this.resultEvent.date.indexOf("T");
+      //this.resultEvent.date = this.resultEvent.date.substring(0, indexNum);
       console.log(response);
     });
     
   }
 
-  deleteEvent(): void {
-    this.eventservice.deleteEvent(this.event.id).subscribe((response: any) => {
-      console.log(response)
+  deleteEvent(eventId: number): void {
+    //console.log(this.event.id);
+    //this.eventservice.deleteEvent(this.event.id).subscribe((response: any) => {
+    //  console.log(response)
+    //});
+    //this.removeFromEvent.emit(this.event.id);
+
+    this.eventservice.deleteEvent(eventId).subscribe((response: any) => {
+      console.log(response);
     });
-    this.removeFromEvent.emit(this.event.id);
+     
+  };
+
+  replaceDetails(): void {
+
+    const app = document.getElementById("details");
+    app.innerHTML = "This event has been deleted";
+
   }
 }

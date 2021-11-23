@@ -2,6 +2,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EventService } from '../event.service';
 import { Event } from '../Event';
+import { FavService } from '../fav.service';
+import { Observable } from 'rxjs';
+
 
 @Component({
     selector: 'app-events',
@@ -11,12 +14,13 @@ import { Event } from '../Event';
 /** Events component*/
 export class EventsComponent {
     /** Events ctor */
-  constructor(private eventservice: EventService) {
+  constructor(private eventservice: EventService, private favservice: FavService) {
 
   }
 
   DisplayEvents: Event[] = [];
   resultEvent: Event = {} as Event;
+  public isAuthenticated: Observable<boolean>;
 
   ngOnInit(): void {
     this.eventservice.getEvents().subscribe((response: any) => {
@@ -27,16 +31,24 @@ export class EventsComponent {
 
   addEvent(form: NgForm): void {
     let newEvent: Event = {
-      Id: 0,
-      Name: form.form.value.name,
-      Date: form.form.value.date,
-      Location: form.form.value.location,
-      Description: form.form.value.description
+      id: 0,
+      name: form.form.value.name,
+      date: form.form.value.date,
+      location: form.form.value.location,
+      description: form.form.value.description
     };
+    console.log(newEvent);
 
-    this.eventservice.addEvent(newEvent.Name, newEvent.Date, newEvent.Location, newEvent.Description).subscribe((response: any) => {
+    this.eventservice.addEvent(newEvent.name, newEvent.date, newEvent.location, newEvent.description).subscribe((response: any) => {
       this.resultEvent = response;
+      console.log(response);
     });
+  }
+
+  addFav(eventId: number): void {
+
+    this.favservice.addFav(eventId);
+
   }
 
 

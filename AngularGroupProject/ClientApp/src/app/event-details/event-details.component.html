@@ -1,4 +1,9 @@
-<h2>{{ resultEvent.name }}</h2>
-<h3>{{ resultEvent.date }}</h3>
-<h3>{{ resultEvent.location }}</h3>
-<p>{{ resultEvent.description }}</p>
+<div id="details">
+  <h2>{{ resultEvent.name }}</h2>
+  <h3>{{ resultEvent.date }}</h3>
+  <h3>{{ resultEvent.location }}</h3>
+  <p>{{ resultEvent.description }}</p>
+  <button (click)="deleteEvent(resultEvent.id);replaceDetails()">Delete Event</button>
+</div>
+<br>
+<button routerLink="/events"> Return to all events </button>
