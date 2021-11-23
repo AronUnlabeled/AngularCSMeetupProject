@@ -10,14 +10,14 @@ export class FavService {
   }
 
   getFavorites(): any {
-    return this.http.get(this.baseUrl + 'api/Fav/allFavs');
+    return this.http.get(this.baseUrl + 'api/Favs/allFavs');
   }
 
   addFav(eventId: number): any {
-    return this.http.post(this.baseUrl + 'api/Fav/addFavs', {});
+    return this.http.post(this.baseUrl + `api/Favs/addFavs?eventId=${eventId}`, {});
   }
 
   deleteFav(favEvent: any): any {
-    return this.http.delete(this.baseUrl + 'api/Fav/deleteFavs');
+    return this.http.delete(this.baseUrl + 'api/Favs/deleteFavs');
   }
 }

@@ -1,9 +1,9 @@
 <h1>Welcome to all events: </h1>
-
+<!-- [myEvent]="E" (removeFromEvents)="removeFromEvents($event)" -->
 <div *ngFor="let E of DisplayEvents">
   <h3>{{ E.name }}</h3>
   <button routerLink="/event/{{ E.id }}">See more details</button>
-  <button onclick="addFav(E.id)">Add to Favorites</button>
+  <button (click)="addFav(E.id)">Add to Favorites</button>
 </div>
 <form #addForm="ngForm" (ngSubmit)="addEvent(addForm)">
   <label for="name">Event Name: </label>
@@ -18,6 +18,6 @@
   <label for="decription">Description: </label>
   <input type="text" name="description" id="description" ngModel /><br />
 
- <button>Add Event</button>
+  <button>Add Event</button>
 
 </form>
