@@ -1,7 +1,7 @@
 export interface Event {
-  Id: number;
-  Name: string;
-  Date: Date;
-  Location: string;
-  Description: string;
+  id: number;
+  name: string;
+  date: string;
+  location: string;
+  description: string;
 }

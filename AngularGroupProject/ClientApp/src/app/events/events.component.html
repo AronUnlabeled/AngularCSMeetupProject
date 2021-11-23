@@ -2,4 +2,5 @@
 
 <div *ngFor="let E of DisplayEvents">
   <h3>{{ E.name }}</h3>
+  <button routerLink="/event/{{ E.id }}">See more details</button>
 </div>

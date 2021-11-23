@@ -25,15 +25,17 @@ export class EventDetailsComponent {
     let ID: number = Number(routeParams.get("id"));
     this.eventservice.getEventById(ID).subscribe((response: any) => {
       this.resultEvent = response;
+      let indexNum: number = this.resultEvent.date.indexOf("T");
+      this.resultEvent.date = this.resultEvent.date.substring(0, indexNum);
       console.log(response);
     });
     
   }
 
   deleteEvent(): void {
-    this.eventservice.deleteEvent(this.event.Id).subscribe((response: any) => {
+    this.eventservice.deleteEvent(this.event.id).subscribe((response: any) => {
       console.log(response)
     });
-    this.removeFromEvent.emit(this.event.Id);
+    this.removeFromEvent.emit(this.event.id);
   }
 }
