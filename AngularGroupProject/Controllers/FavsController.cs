@@ -47,7 +47,6 @@ namespace AngularGroupProject.Controllers
         {
             ClaimsPrincipal currentUser = this.User;
             string currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-            bool exist = false;
 
             Fav newFav = new Fav()
             {
@@ -56,15 +55,26 @@ namespace AngularGroupProject.Controllers
 
             };
 
+            List<Fav> favList = FavsContext.Favs.ToList();
 
-            FavsContext.Favs.Add(newFav);
+            foreach (Fav f in favList)
+                if (f.EventId==eventId) 
+                    if(f.UserId==currentUserID)
+                        return newFav;
+
+            FavsContext.Add(newFav);
             FavsContext.SaveChanges();
+
+            return newFav;
+
+
 
 
             //foreach (Fav f in FavsContext.Favs) {
             //    if (f.EventId == eventId)
             //    {
             //        exist = true;
+            //        break;
             //    }   
             //}
 
@@ -78,7 +88,6 @@ namespace AngularGroupProject.Controllers
             //    FavsContext.Add(newFav);
             //    FavsContext.SaveChanges();
             //}
-            return newFav;
         }
 
         [HttpDelete("deleteFavs")]
