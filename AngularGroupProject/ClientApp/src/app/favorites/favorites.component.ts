@@ -38,11 +38,9 @@ export class FavoritesComponent {
   }
 
   deleteFavorite(eventId: number): void {
-    console.log(eventId);
     this.favService.deleteFav(eventId).subscribe((response: any) => {
       console.log(response);
+      this.UpdateFavs();
     });
-    this.UpdateFavs();
-    console.log(this.DisplayFavs);
   }
 }
