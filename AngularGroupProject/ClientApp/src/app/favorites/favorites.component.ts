@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EventService } from '../event.service';
 import { FavService } from '../fav.service';
 import { Favorite } from '../Favorite';
@@ -14,6 +14,7 @@ import { Favorite } from '../Favorite';
 
 /** Favorites component*/
 export class FavoritesComponent {
+
   DisplayFavs: Event[] = [];
   /** Favorites ctor */
   constructor(private favService: FavService) {
@@ -25,23 +26,22 @@ export class FavoritesComponent {
   countFavs: number = 0;
 
   ngOnInit(): void {
-    this.favService.getFavorites().subscribe((response: any) => {
-      this.DisplayFavs = response;
-      this.countFavs = this.DisplayFavs.length;
-      console.log(response);
-    });
+    this.UpdateFavs();
   }
 
   UpdateFavs(): void {
     this.favService.getFavorites().subscribe((response: any) => {
       this.DisplayFavs = response;
-      console.log(response);
+      this.countFavs = this.DisplayFavs.length;
+      //console.log(response);
     });
   }
 
-  deleteFavorite(favId: number): void {
-
-    this.favService.deleteFav(favId);
+  deleteFavorite(eventId: number): void {
+    console.log(eventId);
+    this.favService.deleteFav(eventId).subscribe((response: any) => {
+      console.log(response);
+    });
     this.UpdateFavs();
     console.log(this.DisplayFavs);
   }

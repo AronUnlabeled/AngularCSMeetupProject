@@ -1,5 +1,5 @@
 export interface Favorite {
-  Id: number;
-  EventId: number;
-  UserId: string;
+  id: number;
+  eventId: number;
+  userId: string;
 }

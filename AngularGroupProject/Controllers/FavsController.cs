@@ -68,10 +68,12 @@ namespace AngularGroupProject.Controllers
             return newFav;
         }
 
-        [HttpDelete("deleteFavs")]
-        public Fav deleteFav(int id)
+        [HttpDelete("deleteFavs/{eventId}")]
+        public Fav deleteFav(int eventId)
         {
-            Fav deletedFav = FavsContext.Favs.Find(id);
+            ClaimsPrincipal currentUser = this.User;
+            string currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            Fav deletedFav = FavsContext.Favs.Where(F => F.EventId == eventId && F.UserId == currentUserID).First();
             FavsContext.Favs.Remove(deletedFav);
             FavsContext.SaveChanges();
             return deletedFav;
