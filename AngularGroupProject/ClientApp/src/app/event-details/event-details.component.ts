@@ -3,6 +3,8 @@ import { EventService } from '../event.service';
 import { Event } from '../Event';
 import { ActivatedRoute } from '@angular/router';
 import { FavService } from '../fav.service';
+import { AuthorizeService } from '../../api-authorization/authorize.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-event-details',
@@ -12,10 +14,11 @@ import { FavService } from '../fav.service';
 /** event-details component*/
 export class EventDetailsComponent {
   /** event-details ctor */
-  constructor(private eventservice: EventService, private favservice: FavService, private router: ActivatedRoute) {
+  constructor(private authorizeservice: AuthorizeService, private eventservice: EventService, private favservice: FavService, private router: ActivatedRoute) {
 
   }
 
+  public isAuthenticated: Observable<boolean>;
   resultEvent: Event = {} as Event;
 
   ngOnInit(): void {
@@ -27,6 +30,7 @@ export class EventDetailsComponent {
       //this.resultEvent.date = this.resultEvent.date.substring(0, indexNum);
       console.log(response);
     });
+    this.isAuthenticated = this.authorizeservice.isAuthenticated();
     
   }
 

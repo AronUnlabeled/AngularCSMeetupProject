@@ -3,7 +3,10 @@
   <h3>{{ resultEvent.date }}</h3>
   <h3>{{ resultEvent.location }}</h3>
   <p>{{ resultEvent.description }}</p>
-  <button (click)="addFav(resultEvent.id)">Add to Favorites</button> <br /><br />
+  <button *ngIf="isAuthenticated | async; else elseBlock" (click)="addFav(resultEvent.id)">Add to Favorites</button>
+  <ng-template #elseBlock>
+    <button routerLink="/authentication/login">Add to Favorites</button>
+  </ng-template>
   <button (click)="deleteEvent(resultEvent.id); replaceDetails()">Delete Event</button>
 </div>
 <br>

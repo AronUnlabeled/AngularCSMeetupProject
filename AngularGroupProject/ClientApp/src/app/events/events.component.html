@@ -2,7 +2,11 @@
 <div *ngFor="let E of DisplayEvents">
   <h3>{{ E.name }}</h3>
   <button routerLink="/event/{{ E.id }}">See more details</button>
-  <button (click)="addFav(E.id)">Add to Favorites</button>
+  <button *ngIf="isAuthenticated | async; else elseBlock" (click)="addFav(E.id)">Add to Favorites</button>
+  <ng-template #elseBlock>
+    <button routerLink="/authentication/login">Add to Favorites</button>
+  </ng-template>
+
 </div>
 <h4>Add a new event: </h4>
 <form #addForm="ngForm" (ngSubmit)="addEvent(addForm)">

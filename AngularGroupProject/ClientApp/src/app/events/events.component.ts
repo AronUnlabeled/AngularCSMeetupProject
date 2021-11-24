@@ -4,6 +4,7 @@ import { EventService } from '../event.service';
 import { Event } from '../Event';
 import { FavService } from '../fav.service';
 import { Observable } from 'rxjs';
+import { AuthorizeService } from '../../api-authorization/authorize.service';
 
 
 
@@ -19,11 +20,8 @@ import { Observable } from 'rxjs';
 /** Events component*/
 export class EventsComponent {
 
-  @Input() MyEvent: Event = {} as Event;
-  @Output() removeFromFav = new EventEmitter<string>();
-
     /** Events ctor */
-  constructor(private eventservice: EventService, private favservice: FavService) {
+  constructor(private eventservice: EventService, private favservice: FavService, private authorizeservice : AuthorizeService) {
 
   }
 
@@ -33,6 +31,7 @@ export class EventsComponent {
 
   ngOnInit(): void {
     this.UpdateEvents();
+    this.isAuthenticated = this.authorizeservice.isAuthenticated();
   }
 
 
