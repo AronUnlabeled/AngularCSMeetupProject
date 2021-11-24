@@ -4,6 +4,7 @@
   <button routerLink="/event/{{ E.id }}">See more details</button>
   <button (click)="addFav(E.id)">Add to Favorites</button>
 </div>
+<h4>Add a new event: </h4>
 <form #addForm="ngForm" (ngSubmit)="addEvent(addForm)">
   <label for="name">Event Name: </label>
   <input type="text" name="name" id="name" ngModel /><br />
@@ -17,7 +18,6 @@
   <label for="decription">Description: </label>
   <input type="text" name="description" id="description" ngModel /><br />
 
-  <h4>Add a new event: </h4>
   <button>Add Event</button>
 
 </form>
