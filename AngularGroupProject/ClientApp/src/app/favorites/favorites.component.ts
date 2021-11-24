@@ -22,7 +22,17 @@ export class FavoritesComponent {
 
   }
 
+  countFavs: number = 0;
+
   ngOnInit(): void {
+    this.favService.getFavorites().subscribe((response: any) => {
+      this.DisplayFavs = response;
+      this.countFavs = this.DisplayFavs.length;
+      console.log(response);
+    });
+  }
+
+  UpdateFavs(): void {
     this.favService.getFavorites().subscribe((response: any) => {
       this.DisplayFavs = response;
       console.log(response);
@@ -32,6 +42,7 @@ export class FavoritesComponent {
   deleteFavorite(favId: number): void {
 
     this.favService.deleteFav(favId);
-
+    this.UpdateFavs();
+    console.log(this.DisplayFavs);
   }
 }

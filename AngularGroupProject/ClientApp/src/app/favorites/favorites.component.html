@@ -1,3 +1,10 @@
+<div *ngIf="countFavs == 0">
+  <h3>You do not have any favorites yet!</h3>
+</div>
+
 <div *ngFor="let f of DisplayFavs">
   {{f.name}}
+  <button (click)="deleteFavorite(f.id)">Remove from favorites</button>
 </div>
+
+

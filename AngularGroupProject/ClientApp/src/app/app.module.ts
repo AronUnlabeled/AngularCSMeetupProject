@@ -38,7 +38,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
       { path: 'events', component: EventsComponent },
       { path: 'event/:id', component: EventDetailsComponent },
-      { path: 'favorites', component: FavoritesComponent }
+      { path: 'favorites', component: FavoritesComponent, canActivate: [AuthorizeGuard] }
     ])
   ],
   providers: [

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EventService } from '../event.service';
 import { Event } from '../Event';
 import { ActivatedRoute } from '@angular/router';
+import { FavService } from '../fav.service';
 
 @Component({
     selector: 'app-event-details',
@@ -10,15 +11,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 /** event-details component*/
 export class EventDetailsComponent {
-    /** event-details ctor */
-  constructor(private eventservice: EventService, private router: ActivatedRoute) {
+  /** event-details ctor */
+  constructor(private eventservice: EventService, private favservice: FavService, private router: ActivatedRoute) {
 
   }
 
   resultEvent: Event = {} as Event;
-
-  //@Input() event: Event = {} as Event;
-  //@Output() removeFromEvent = new EventEmitter<Number>();
 
   ngOnInit(): void {
     const routeParams = this.router.snapshot.paramMap;
@@ -33,17 +31,20 @@ export class EventDetailsComponent {
   }
 
   deleteEvent(eventId: number): void {
-    //console.log(this.event.id);
-    //this.eventservice.deleteEvent(this.event.id).subscribe((response: any) => {
-    //  console.log(response)
-    //});
-    //this.removeFromEvent.emit(this.event.id);
-
     this.eventservice.deleteEvent(eventId).subscribe((response: any) => {
       console.log(response);
     });
      
   };
+
+  addFav(eventId: number): void {
+
+    this.favservice.addFav(eventId).subscribe((response: any) => {
+
+      console.log(response);
+    });
+
+  }
 
   replaceDetails(): void {
 

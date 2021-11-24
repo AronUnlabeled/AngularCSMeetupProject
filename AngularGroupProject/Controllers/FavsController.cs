@@ -66,28 +66,6 @@ namespace AngularGroupProject.Controllers
             FavsContext.SaveChanges();
 
             return newFav;
-
-
-
-
-            //foreach (Fav f in FavsContext.Favs) {
-            //    if (f.EventId == eventId)
-            //    {
-            //        exist = true;
-            //        break;
-            //    }   
-            //}
-
-            //if (!exist) {
-            //    FavsContext.Favs.Add(newFav);
-            //    FavsContext.SaveChanges();
-            //}
-
-            //if (!FavsContext.Favs.Any(f => f.EventId== eventId))
-            //{
-            //    FavsContext.Add(newFav);
-            //    FavsContext.SaveChanges();
-            //}
         }
 
         [HttpDelete("deleteFavs")]

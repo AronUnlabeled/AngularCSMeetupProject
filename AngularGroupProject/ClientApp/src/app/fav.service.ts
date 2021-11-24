@@ -17,7 +17,7 @@ export class FavService {
     return this.http.post(this.baseUrl + `api/Favs/addFavs?eventId=${eventId}`, {});
   }
 
-  deleteFav(favEvent: any): any {
-    return this.http.delete(this.baseUrl + 'api/Favs/deleteFavs');
+  deleteFav(eventId: number): any {
+    return this.http.delete(this.baseUrl + `api/Favs/deleteFavs?id=${eventId}`);
   }
 }
