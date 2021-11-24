@@ -7,7 +7,9 @@
   <ng-template #elseBlock>
     <button routerLink="/authentication/login">Add to Favorites</button>
   </ng-template>
-  <button (click)="deleteEvent(resultEvent.id); replaceDetails()">Delete Event</button>
+  <div *ngIf="isAuthenticated | async">
+    <button *ngIf="isAdmin" (click)="deleteEvent(resultEvent.id); replaceDetails()">Delete Event</button>
+  </div>
 </div>
 <br>
 <button routerLink="/events"> Return to all events </button>

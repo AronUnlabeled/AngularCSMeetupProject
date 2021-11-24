@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FavService } from '../fav.service';
 import { AuthorizeService } from '../../api-authorization/authorize.service';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-event-details',
@@ -19,8 +20,11 @@ export class EventDetailsComponent {
   }
 
   public isAuthenticated: Observable<boolean>;
+  public userName: Observable<string>;
+  public companyName: string = "clockworks.com"
+  public isAdmin: boolean = false;
   resultEvent: Event = {} as Event;
-
+  
   ngOnInit(): void {
     const routeParams = this.router.snapshot.paramMap;
     let ID: number = Number(routeParams.get("id"));
@@ -30,8 +34,18 @@ export class EventDetailsComponent {
       //this.resultEvent.date = this.resultEvent.date.substring(0, indexNum);
       console.log(response);
     });
+
     this.isAuthenticated = this.authorizeservice.isAuthenticated();
-    
+    this.checkAdmin();
+  }
+
+  checkAdmin(): void {
+    this.userName = this.authorizeservice.getUser().pipe(map(u => u && u.name));
+    this.userName.subscribe((response: string) => {
+      if (response.includes(this.companyName)) {
+        this.isAdmin = true;
+      }
+    })
   }
 
   deleteEvent(eventId: number): void {
