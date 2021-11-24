@@ -23,6 +23,14 @@ export class EventDetailsComponent {
   public userName: Observable<string>;
   public companyName: string = "clockworks.com"
   public isAdmin: boolean = false;
+  public dateOnly: string[] = [];
+  public day: string = "";
+  public month: string = "";
+  public year: string = "";
+  public timeOnly: string[] = [];
+  public hour: number = 0;
+  public minute: string = "";
+  public ampm: string = "AM";
   resultEvent: Event = {} as Event;
   
   ngOnInit(): void {
@@ -30,9 +38,23 @@ export class EventDetailsComponent {
     let ID: number = Number(routeParams.get("id"));
     this.eventservice.getEventById(ID).subscribe((response: any) => {
       this.resultEvent = response;
-      //let indexNum: number = this.resultEvent.date.indexOf("T");
-      //this.resultEvent.date = this.resultEvent.date.substring(0, indexNum);
       console.log(response);
+      this.dateOnly = response.date.split('T')[0].split('-');
+      console.log(response.date);
+      this.day = this.dateOnly[2];
+      this.month = this.dateOnly[1];
+      this.year = this.dateOnly[0];
+
+      this.timeOnly = response.date.split('T')[1].split(':');
+      this.hour = +this.timeOnly[0];
+      if (this.hour > 12) {
+        this.ampm = "PM"
+      }
+      this.hour = this.hour % 12;
+      if (this.hour == 0) {
+        this.hour = 12;
+      }
+      this.minute = this.timeOnly[1];
     });
 
     this.isAuthenticated = this.authorizeservice.isAuthenticated();
