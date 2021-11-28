@@ -13,6 +13,7 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 import { EventsComponent } from './events/events.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { NewEventComponent } from './new-event/new-event.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FavoritesComponent } from './favorites/favorites.component';
     HomeComponent,
     EventsComponent,
     EventDetailsComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    NewEventComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,7 +34,8 @@ import { FavoritesComponent } from './favorites/favorites.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'events', component: EventsComponent },
       { path: 'event/:id', component: EventDetailsComponent },
-      { path: 'favorites', component: FavoritesComponent, canActivate: [AuthorizeGuard] }
+      { path: 'favorites', component: FavoritesComponent, canActivate: [AuthorizeGuard] },
+      { path: 'newEvent', component: NewEventComponent }
     ])
   ],
   providers: [

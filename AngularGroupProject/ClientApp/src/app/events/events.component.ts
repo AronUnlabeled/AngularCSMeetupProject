@@ -9,9 +9,9 @@ import { AuthorizeService } from '../../api-authorization/authorize.service';
 
 
 @Component({
-    selector: 'app-events',
-    templateUrl: './events.component.html',
-    styleUrls: ['./events.component.css']
+  selector: 'app-events',
+  templateUrl: './events.component.html',
+  styleUrls: ['./events.component.css']
 })
 
 
@@ -20,8 +20,8 @@ import { AuthorizeService } from '../../api-authorization/authorize.service';
 /** Events component*/
 export class EventsComponent {
 
-    /** Events ctor */
-  constructor(private eventservice: EventService, private favservice: FavService, private authorizeservice : AuthorizeService) {
+  /** Events ctor */
+  constructor(private eventservice: EventService, private favservice: FavService, private authorizeservice: AuthorizeService) {
 
   }
 
@@ -61,9 +61,9 @@ export class EventsComponent {
   }
 
   addFav(eventId: number): void {
-    
+
     this.favservice.addFav(eventId).subscribe((response: any) => {
-     
+
       console.log(response);
     });
 
@@ -75,7 +75,9 @@ export class EventsComponent {
     this.DisplayEvents.splice(index, 1);
   }
 
+  filteredEvents: Event[] = this.DisplayEvents;
 
-
-
+  filterEvents(input: string) {
+    this.filteredEvents = this.DisplayEvents.filter(E => E.name.includes(input));
+  }
 }

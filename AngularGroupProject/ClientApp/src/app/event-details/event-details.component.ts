@@ -47,9 +47,11 @@ export class EventDetailsComponent {
 
       this.timeOnly = response.date.split('T')[1].split(':');
       this.hour = +this.timeOnly[0];
+
       if (this.hour > 12) {
         this.ampm = "PM"
       }
+
       this.hour = this.hour % 12;
       if (this.hour == 0) {
         this.hour = 12;
@@ -89,7 +91,7 @@ export class EventDetailsComponent {
   replaceDetails(): void {
 
     const app = document.getElementById("details");
-    app.innerHTML = "This event has been deleted";
+    app.innerHTML = "This event has been deleted.";
 
   }
 }
