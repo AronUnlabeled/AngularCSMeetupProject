@@ -19,7 +19,7 @@
 
   <!--Section to display list of events-->
   <div *ngFor="let E of filteredEvents">
-    <div class="shadow p-3 mb-1 bg-white rounded mt-4 d-flex" data-bs-toggle="collapse" data-bs-target="#details">
+    <div class="shadow p-3 mb-1 bg-white rounded mt-4 d-flex">
       <div class="p-2">
         <a class="btn btn-link btn-floating btn text-dark"
            title="Add to your favorites"
@@ -48,8 +48,6 @@
         <button class="btn btn-outline-dark" style="width: 250px" routerLink="/event/{{ E.id }}">See more details</button>
       </div>
     </div>
-    <div id="details">
-      <app-event-details></app-event-details>
-    </div>
+    
     <br />
   </div>

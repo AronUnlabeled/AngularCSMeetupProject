@@ -40,6 +40,16 @@ export class EventsComponent {
 
     this.eventservice.getEvents().subscribe((response: any) => {
       this.DisplayEvents = response;
+
+      for (var i = 1; i < this.DisplayEvents.length; i++) {
+        if (this.DisplayEvents[i - 1].date > this.DisplayEvents[i].date) {
+          let t: Event = this.DisplayEvents[i - 1];
+          this.DisplayEvents[i - 1] = this.DisplayEvents[i];
+          this.DisplayEvents[i] = t;
+        }
+      }
+      console.log(this.DisplayEvents);
+
       this.filteredEvents = this.DisplayEvents;
       console.log(response);
     });
