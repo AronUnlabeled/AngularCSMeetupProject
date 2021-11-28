@@ -37,8 +37,10 @@ export class EventsComponent {
 
 
   UpdateEvents(): void {
+
     this.eventservice.getEvents().subscribe((response: any) => {
       this.DisplayEvents = response;
+      this.filteredEvents = this.DisplayEvents;
       console.log(response);
     });
   }
@@ -79,5 +81,6 @@ export class EventsComponent {
 
   filterEvents(input: string) {
     this.filteredEvents = this.DisplayEvents.filter(E => E.name.includes(input));
+    console.log(this.filteredEvents);
   }
 }
