@@ -25,6 +25,10 @@ export class EventsComponent {
 
   }
 
+
+  //today: Date = new Date(2021, 11, 28, 0, 0, 0, 0);
+  today: string = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}T01:00:00`;
+  TempEvents: Event[]=[]
   DisplayEvents: Event[] = [];
   resultEvent: Event = {} as Event;
   public isAuthenticated: Observable<boolean>;
@@ -40,14 +44,35 @@ export class EventsComponent {
 
     this.eventservice.getEvents().subscribe((response: any) => {
       this.DisplayEvents = response;
+      
+      for (var i = 0; i < this.DisplayEvents.length; i++) {
+        console.log(this.DisplayEvents[i].date)
+        console.log(this.today);
+        if (this.DisplayEvents[i].date +""< this.today) {
+          console.log(this.today);
+          this.DisplayEvents.splice(i,1);
+        }
 
-      for (var i = 1; i < this.DisplayEvents.length; i++) {
-        if (this.DisplayEvents[i - 1].date > this.DisplayEvents[i].date) {
-          let t: Event = this.DisplayEvents[i - 1];
-          this.DisplayEvents[i - 1] = this.DisplayEvents[i];
-          this.DisplayEvents[i] = t;
+      }
+
+      console.log(this.DisplayEvents);
+
+
+      for (var i = 0; i < this.DisplayEvents.length-1; i++) {
+        for (var j = 0; j < this.DisplayEvents.length- i -1; j++) {
+          if (this.DisplayEvents[j].date > this.DisplayEvents[j+1].date) {
+            let t: Event = this.DisplayEvents[j];
+            this.DisplayEvents[j] = this.DisplayEvents[j + 1];
+            this.DisplayEvents[j + 1] = t;
+          }
+
+          
+
         }
       }
+
+
+
       console.log(this.DisplayEvents);
 
       this.filteredEvents = this.DisplayEvents;
