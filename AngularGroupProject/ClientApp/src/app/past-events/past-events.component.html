@@ -1,0 +1,13 @@
+<button class="btn btn-dark btn-block btn-lg" routerLink="/events">Return to all events</button>
+<br />
+<div *ngFor="let E of pastEvents">
+  <div class="shadow p-3 mb-1 bg-white rounded mt-4">
+    <div class="d-flex justify-content-between">
+      <h1>{{E.name}}</h1>
+      <div *ngIf="isAuthenticated | async">
+        <button class="btn btn-danger" *ngIf="isAdmin" (click)="deleteEvent(E.id); refreshPage()">Delete Event</button>
+      </div>
+    </div>
+    <p>{{E.location}}</p>
+  </div>
+</div>

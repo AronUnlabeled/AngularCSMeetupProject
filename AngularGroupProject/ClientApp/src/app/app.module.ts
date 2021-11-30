@@ -14,6 +14,8 @@ import { EventsComponent } from './events/events.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { NewEventComponent } from './new-event/new-event.component';
+import { PastEventsComponent } from './past-events/past-events.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { NewEventComponent } from './new-event/new-event.component';
     EventsComponent,
     EventDetailsComponent,
     FavoritesComponent,
-    NewEventComponent
+    NewEventComponent,
+    PastEventsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -35,7 +39,8 @@ import { NewEventComponent } from './new-event/new-event.component';
       { path: 'events', component: EventsComponent },
       { path: 'event/:id', component: EventDetailsComponent },
       { path: 'favorites', component: FavoritesComponent, canActivate: [AuthorizeGuard] },
-      { path: 'newEvent', component: NewEventComponent }
+      { path: 'newEvent', component: NewEventComponent },
+      { path: 'pastEvents', component: PastEventsComponent },
     ])
   ],
   providers: [

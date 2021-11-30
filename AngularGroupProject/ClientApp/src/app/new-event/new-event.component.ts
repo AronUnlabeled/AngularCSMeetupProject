@@ -16,6 +16,7 @@ export class NewEventComponent {
   }
 
   resultEvent: Event = {} as Event;
+  today: Date = new Date();
 
   addEvent(form: NgForm): void {
     let newEvent: Event = {
@@ -37,4 +38,5 @@ export class NewEventComponent {
     const app = document.getElementById("added");
     app.innerHTML = "Your event has been added.";
   }
+
 }

@@ -32,6 +32,7 @@ export class EventDetailsComponent {
   public minute: string = "";
   public ampm: string = "AM";
   resultEvent: Event = {} as Event;
+  public favorited: boolean = false;
   
   ngOnInit(): void {
     const routeParams = this.router.snapshot.paramMap;
@@ -68,6 +69,15 @@ export class EventDetailsComponent {
     this.userName.subscribe((response: string) => {
       if (response.includes(this.companyName)) {
         this.isAdmin = true;
+      }
+    })
+  }
+
+  checkFav(): void {
+    this.favservice.getFavorites().subscribe((response: any) {
+      let tempFavs: Event[] = response;
+      if (tempFavs.includes(this.resultEvent)) {
+        this.favorited = true;
       }
     })
   }
